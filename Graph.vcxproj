@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EdgeLinkedGraph.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MatrixGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EdgeLinkedGraph.h" />
     <ClInclude Include="MatrixGraph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
