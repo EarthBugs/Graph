@@ -1,12 +1,12 @@
 #pragma once
 
-const int MAXSIZE = 16;
+const int MAXSIZE1 = 16;
 
 //边结点
 struct EdgeNode
 {
 	int adjvex;
-	EdgeNode* next;
+	EdgeNode* next = nullptr;
 };
 
 //点结点
@@ -14,14 +14,14 @@ template<class DataType>
 struct VertexNode
 {
 	DataType vertex;
-	EdgeNode* firstedge;
+	EdgeNode* firstedge = nullptr;
 };
 
 template<class DataType>
 class EdgeLinkedGraph
 {
 private:
-	VertexNode<DataType> adjlist[MAXSIZE];//存放顶点表的数组
+	VertexNode<DataType> adjlist[MAXSIZE1];//存放顶点表的数组
 	int vertexNum, edgeNum;//顶点数和边数
 	void DFT(int v, bool visited[]);
 	void BFT(int v, bool visited[]);

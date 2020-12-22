@@ -6,16 +6,16 @@ using namespace std;
 template<class DataType>
 void EdgeLinkedGraph<DataType>::DFT(int v, bool visited[])
 {
-	EdgeNode* ptr = nullptr;
-	int index;
+	EdgeNode* ptr = NULL;
+	int index = 0;
 	cout << "已访问：" << adjlist[v].vertex << endl;
 	visited[v] = true;
-	ptr = adjlist[v]->firstedge;
-	while (ptr != nullptr)
+	ptr = adjlist[v].firstedge;
+	while (ptr != NULL)
 	{
 		index = ptr->adjvex;
 		if (visited[index] == false)
-			DFT(v, visited);
+			DFT(index, visited);
 		ptr = ptr->next;
 	}
 }
@@ -24,6 +24,31 @@ void EdgeLinkedGraph<DataType>::DFT(int v, bool visited[])
 template<class DataType>
 void EdgeLinkedGraph<DataType>::BFT(int v, bool visited[])
 {
+	int Queue[MAXSIZE1];
+	int front = -1, rear = -1;
+	EdgeNode* ptr = nullptr;
+	cout << "已访问：" << adjlist[v].vertex << endl;
+	visited[v] = true;
+	rear++;
+	Queue[rear] = v;
+	while (front != rear)
+	{
+		front++;
+		v = Queue[front];
+		ptr = adjlist[v].firstedge;
+		while (ptr != nullptr)
+		{
+			int index = ptr->adjvex;
+			if (visited[index] == false)
+			{
+				cout << "已访问：" << adjlist[index].vertex << endl;
+				visited[index] = true;
+				rear++;
+				Queue[rear] = v;
+			}
+			ptr = ptr->next;
+		}
+	}
 }
 
 //构造函数
@@ -32,18 +57,21 @@ inline EdgeLinkedGraph<DataType>::EdgeLinkedGraph(DataType data[], int vertexNum
 {
 	this->vertexNum = vertexNum;
 	this->edgeNum = edgeNum;
-	for (int index = 0; index < VertexNum; index++)
+	for (int index = 0; index < vertexNum; index++)
 	{
-		adjlist[index]->vertex = data[index];
-		adjlist[index]->firstedge = nullptr;
+		adjlist[index].vertex = data[index];
+		adjlist[index].firstedge = nullptr;
 	}
-	for (int index = 0, index1, index2, EdgeNode* temp; k < edgeNum; index++)
+	EdgeNode* temp;
+	int index = 0, index1, index2;
+	for (; index < edgeNum; index++)
 	{
 		cout << "请输入边两个顶点的序号：";
 		cin >> index1 >> index2;
 		temp = new EdgeNode;
-		temp.next = adjlist[index1].firstedge;
-		adjlist[i].firstedge = temp;
+		temp->adjvex = index2;
+		temp->next = adjlist[index1].firstedge;
+		adjlist[index1].firstedge = temp;
 	}
 }
 
@@ -54,10 +82,10 @@ EdgeLinkedGraph<DataType>::~EdgeLinkedGraph()
 	EdgeNode* ptr = nullptr;
 	for (int index = 0; index < vertexNum; index++)
 	{
-		ptr = adjlist[index]->firstedge;
-		while (ptr!+ nullptr)
+		ptr = adjlist[index].firstedge;
+		while (ptr != nullptr && ptr->next != nullptr)
 		{
-			adjlist[index]->firstedge = ptr->next;
+			adjlist[index].firstedge = ptr->next;
 			delete ptr;
 		}
 	}
@@ -67,14 +95,14 @@ EdgeLinkedGraph<DataType>::~EdgeLinkedGraph()
 template<class DataType>
 inline void EdgeLinkedGraph<DataType>::DeepFirstTraverse(int v)
 {
-	bool visited[MAXSIZE]{ 0 };
-	DFT(v, visited)
+	bool visited[MAXSIZE1]{ 0 };
+	DFT(v, visited);
 }
 
 //广度优先遍历
 template<class DataType>
 inline void EdgeLinkedGraph<DataType>::BreathFirstTraverse(int v)
 {
-	bool visited[MAXSIZE]{ 0 };
-	BFT(v, visited)
+	bool visited[MAXSIZE1]{ 0 };
+	BFT(v, visited);
 }
