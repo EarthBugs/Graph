@@ -1,5 +1,7 @@
 #pragma once
 
+const int MAXSIZE = 16;
+
 //边结点
 struct EdgeNode
 {
@@ -21,6 +23,8 @@ class EdgeLinkedGraph
 private:
 	VertexNode<DataType> adjlist[MAXSIZE];//存放顶点表的数组
 	int vertexNum, edgeNum;//顶点数和边数
+	void DFT(int v, bool visited[]);
+	void BFT(int v, bool visited[]);
 public:
 	EdgeLinkedGraph(DataType data[], int vertexNum, int edgeNum);//构造函数
 	~EdgeLinkedGraph();//析构函数

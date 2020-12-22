@@ -2,6 +2,30 @@
 #include "EdgeLinkedGraph.h"
 using namespace std;
 
+//深度优先遍历
+template<class DataType>
+void EdgeLinkedGraph<DataType>::DFT(int v, bool visited[])
+{
+	EdgeNode* ptr = nullptr;
+	int index;
+	cout << "已访问：" << adjlist[v].vertex << endl;
+	visited[v] = true;
+	ptr = adjlist[v]->firstedge;
+	while (ptr != nullptr)
+	{
+		index = ptr->adjvex;
+		if (visited[index] == false)
+			DFT(v, visited);
+		ptr = ptr->next;
+	}
+}
+
+//广度优先遍历
+template<class DataType>
+void EdgeLinkedGraph<DataType>::BFT(int v, bool visited[])
+{
+}
+
 //构造函数
 template<class DataType>
 inline EdgeLinkedGraph<DataType>::EdgeLinkedGraph(DataType data[], int vertexNum, int edgeNum)
@@ -43,15 +67,14 @@ EdgeLinkedGraph<DataType>::~EdgeLinkedGraph()
 template<class DataType>
 inline void EdgeLinkedGraph<DataType>::DeepFirstTraverse(int v)
 {
-	EdgeNode* ptr = nullptr;
-	int index;
-	cout << "已访问：" << adjlist[v].vertex << endl;
-
+	bool visited[MAXSIZE]{ 0 };
+	DFT(v, visited)
 }
 
 //广度优先遍历
 template<class DataType>
 inline void EdgeLinkedGraph<DataType>::BreathFirstTraverse(int v)
 {
-
+	bool visited[MAXSIZE]{ 0 };
+	BFT(v, visited)
 }
