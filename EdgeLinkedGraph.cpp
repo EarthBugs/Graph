@@ -44,7 +44,7 @@ void EdgeLinkedGraph<DataType>::BFT(int v, bool visited[])
 				cout << "ÒÑ·ÃÎÊ£º" << adjlist[index].vertex << endl;
 				visited[index] = true;
 				rear++;
-				Queue[rear] = v;
+				Queue[rear] = index;
 			}
 			ptr = ptr->next;
 		}

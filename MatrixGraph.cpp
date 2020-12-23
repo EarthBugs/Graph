@@ -21,8 +21,7 @@ void MatrixGraph<DataType>::BFT(int v, bool visited[])
 	int front = -1, rear = -1;//初始化队列
 	cout << "已访问：" << vertex[v] << endl;
 	visited[v] = true;
-	rear++;
-	Queue[rear] = v;
+	Queue[++rear] = v;
 	while (front != rear)
 	{
 		front++;
@@ -30,7 +29,7 @@ void MatrixGraph<DataType>::BFT(int v, bool visited[])
 		for (int index = 0; index < vertexNum; index++)
 			if (edge[v][index] == true && visited[index] == false)
 			{
-				cout << "已访问：" << vertex[v] << endl;
+				cout << "已访问：" << vertex[index] << endl;
 				visited[index] = true;
 				rear++;
 				Queue[rear] = index;
